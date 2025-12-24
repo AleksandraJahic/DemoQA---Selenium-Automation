@@ -10,7 +10,12 @@ import java.util.List;
 public class BookStore {
     WebDriver driver;
 
-
+    public List<WebElement> getBookTitles() {
+        return driver.findElements(By.cssSelector(".rt-td:nth-child(2)"));
+    }
+    public List<WebElement> getBookAuthors() {
+        return driver.findElements(By.cssSelector(".rt-td:nth-child(3)"));
+    }
 
     public BookStore(WebDriver driver) {
         this.driver = driver;
@@ -32,6 +37,7 @@ public class BookStore {
     public WebElement getParent() {
         return driver.findElement(By.cssSelector(".select-wrap.-pageSizeOptions"));
     }
+
     public List<WebElement> getOptions() {
         return getParent().findElements(By.tagName("option"));
     }
@@ -49,15 +55,17 @@ public class BookStore {
     public void typeInSearchBox(String text) {
         getSearchBox().sendKeys(text);
     }
+
     public void clickSearch() {
         getSearchButton().click();
     }
+
     public void clickOnPageSizeOptions() {
         getShowRows().click();
     }
 
     public void selectNumberOfRows(String rowNumbers) {
-        for (int i=0; i< getOptions().size(); i++) {
+        for (int i = 0; i < getOptions().size(); i++) {
             if (getOptions().get(i).getAttribute("value").equals(rowNumbers)) {
                 getOptions().get(i).click();
                 break;
@@ -69,9 +77,38 @@ public class BookStore {
         return getRows().size();
     }
 
-public String selectedRow() {
-    Select select = new Select(driver.findElement(By.tagName("select")));
-    return select.getFirstSelectedOption().getText();
-}
+    public String selectedRow() {
+        Select select = new Select(driver.findElement(By.tagName("select")));
+        return select.getFirstSelectedOption().getText();
+    }
+
+
+    public boolean isBookTitleDisplayed(String expectedTitle) {
+        for (WebElement title : getBookTitles()) {
+            if (title.getText().equalsIgnoreCase(expectedTitle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean isAuthorDisplayed(String expectedAuthor) {
+        for (WebElement author : getBookAuthors()) {
+            if (author.getText().equalsIgnoreCase(expectedAuthor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isStringContained(String partialName) {
+        for (WebElement title : getBookTitles()) {
+            if (title.getText().contains(partialName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

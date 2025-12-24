@@ -1,6 +1,7 @@
 package Tests.BookSearchTests;
 
 import Base.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,6 +18,8 @@ public class userCanSearchBooksUsingSearchBox extends BaseTest {
 
     bookStore.typeInSearchBox(bookTitle);
     bookStore.clickSearch();
+
+        Assert.assertTrue(bookStore.isBookTitleDisplayed(bookTitle));
     }
 
     @Test
@@ -25,20 +28,31 @@ public class userCanSearchBooksUsingSearchBox extends BaseTest {
 
         bookStore.typeInSearchBox(author);
         bookStore.clickSearch();
+
+        Assert.assertTrue(bookStore.isAuthorDisplayed(author));
+
     }
 
     @Test
-    public void partialSearch() {
-        String name = excelReader.getStringData("BookTitles", 4, 1);
+    public void partialSearch() throws InterruptedException {
+        String name = excelReader.getStringData("BookTitles", 4, 0);
         String partOfTheName = name.substring(0,3); //substring - pretraga dela stringa, prvi broj je index odakle pocinjemo, drugi broj karaktera
         bookStore.typeInSearchBox(partOfTheName);
         bookStore.clickSearch();
+
+
+
+        Assert.assertTrue(bookStore.isStringContained(partOfTheName));
+
+
     }
     @Test
-    public void oneLetterSearch() {
+    public void oneLetterSearch() throws InterruptedException {
         String letter = "b";
         bookStore.typeInSearchBox(letter);
         bookStore.clickSearch();
+        Assert.assertTrue(bookStore.isStringContained(letter));
+
     }
 
 }
