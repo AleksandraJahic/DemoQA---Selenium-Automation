@@ -10,17 +10,17 @@ import java.util.List;
 public class BookStore {
     WebDriver driver;
 
+
+    public BookStore(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public List<WebElement> getBookTitles() {
         return driver.findElements(By.cssSelector(".rt-td:nth-child(2)"));
     }
     public List<WebElement> getBookAuthors() {
         return driver.findElements(By.cssSelector(".rt-td:nth-child(3)"));
     }
-
-    public BookStore(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public WebElement getSearchBox() {
         return driver.findElement(By.id("searchBox"));
     }
