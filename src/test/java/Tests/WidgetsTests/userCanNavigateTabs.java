@@ -86,8 +86,7 @@ public class userCanNavigateTabs extends BaseTest {
     public void userCanOpenMoreTab() {
         sideBar.clickOnSubMenuItem("Tabs");
         WebElement element3 = driver.findElement(By.cssSelector("#tabsContainer"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", element3);
+        scrollToElement(element3);
 
         tabsPage.clickOnMoreTab();
 
