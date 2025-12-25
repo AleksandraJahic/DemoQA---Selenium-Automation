@@ -2,13 +2,12 @@ package Tests.WidgetsTests;
 
 import Base.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class usercanExtendMenu extends BaseTest {
+public class UserCanExtendMenu extends BaseTest {
     @BeforeMethod
     public void pageSetUp() {
         navigateToWidgets();

@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class userCanSearchBooksUsingSearchBox extends BaseTest {
+public class UserCanSearchBooksUsingSearchBox extends BaseTest {
 
     @BeforeMethod
     public void pageSetUp()  {
@@ -39,8 +39,6 @@ public class userCanSearchBooksUsingSearchBox extends BaseTest {
         String partOfTheName = name.substring(0,3); //substring - pretraga dela stringa, prvi broj je index odakle pocinjemo, drugi broj karaktera
         bookStore.typeInSearchBox(partOfTheName);
         bookStore.clickSearch();
-
-
 
         Assert.assertTrue(bookStore.isStringContained(partOfTheName));
 
